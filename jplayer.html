@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script type="text/javascript" src="jquery.min.js"></script>
+<script type="text/javascript" src="jplayer/jquery.jplayer.min.js"></script>
+<script type="text/javascript">
+//<![CDATA[
+
+p = null;
+
+function play() {
+
+	setTimeout(function() {
+		p.click();
+	}, 1000);
+}
+
+$(document).ready(function(){
+
+	// Local copy of jQuery selectors, for performance.
+	var	my_jPlayer = $("#jquery_jplayer");
+
+	// Instance jPlayer
+	my_jPlayer.jPlayer({
+		ready: function () {
+		},
+		swfPath: "js",
+		cssSelectorAncestor: "#jp_container",
+		supplied: "mp3",
+	});
+
+		my_jPlayer.jPlayer("setMedia", {
+			// Safari can't play from local or https
+			mp3: "audio/ticktock.mp3"
+			// ok Safari:
+			//mp3: "https://abugov.github.io/qndtimer/audio/charge.mp3"
+			//mp3: "http://abugov.com/qndtimer/audio/ticktock.mp3"
+		});
+
+});
+//]]>
+</script>
+
+</head>
+<body>
+
+		<div id="jquery_jplayer"></div>
+
+		<label onclick="p = $('#play'); play();">my play</label>
+		
+		<div id="jp_container">
+			<ul>
+				<li><a id="play" class="jp-play" href="#">Play</a></li>
+				<li><a class="jp-pause" href="#">Pause</a></li>
+				<li><a class="jp-stop" href="#">Stop</a></li>
+				<li><a class="jp-mute" href="#">Mute</a></li>
+			</ul>
+		</div>
+
+</body>
+
+</html>

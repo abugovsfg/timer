@@ -1,0 +1,153 @@
+﻿<!doctype html>
+<!--<html manifest="main.appcache">-->
+<html>
+<head>
+	<!-- Mobile installtohomescreen -->
+    <title>Q&D Timer</title>
+    <meta name="application-name" content="Q&D Timer">
+    <meta name="apple-mobile-web-app-title" content="Q&D Timer">
+    <meta name="viewport" content="width=300">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- for ios 7 style -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="icon192.png">
+    <!-- for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" sizes="192x192" href="icon192.png">
+
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<link rel="manifest" href="manifest.json">
+    <link rel="icon" sizes="192x192" href="icon192.png">
+	<link rel="icon" sizes="128x128" href="icon128.png">
+	 
+	<script type="text/javascript" src="jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.longclick-1.0.min.js"></script>
+
+    <script type="text/javascript" src="jplayer/jquery.jplayer.min.js"></script>
+	<script type="text/javascript" src="total-storage/jquery.total-storage.min.js"></script>
+	
+	<script type="text/javascript" src="myStorage.js"></script>
+	<script type="text/javascript" src="main2.js"></script>
+
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+	
+	<link rel="stylesheet" href="main.css" />
+</head>
+
+<body onload="init()" style="width: 300px;">
+	<br/>
+	<div id="config" style="text-align:center">
+		<div class="configGroup">
+			<input type="radio" id="sessionSwing" name="sessionrb" checked="checked"><label class="radiolbl" for="sessionSwing">Swings & Pushups</label>
+			<input type="radio" id="sessionSnatch" name="sessionrb"><label class="radiolbl" for="sessionSnatch">Snatches</label>
+		</div>
+
+		<br/>
+
+		<button type="button" onClick="rand()" class="btn btn-default btn-sm">
+			<img src="img/dice.png"/>
+		</button>
+
+		<br/>
+		<br/>
+		<!-- Series number -->
+		<div class="configGroup" style="text-align:left; display: inline-block">
+			Number of series:
+			<br/>
+			<input type="radio" id="series2" name="seriesrb" checked="checked"><label class="radiolbl" for="series2">2</label>
+			<input type="radio" id="series3" name="seriesrb"><label class="radiolbl" for="series3">3</label>
+			<input type="radio" id="series4" name="seriesrb"><label class="radiolbl" for="series4">4</label>
+			<input type="radio" id="series5" name="seriesrb"><label class="radiolbl" for="series5">5</label>
+		</div>
+
+		<!-- Reps/sets -->
+		<div class="configGroup">
+			<input type="radio" id="reps5" name="repsrb" checked="checked"><label class="radiolbl" for="reps5">5/4</label>
+			<input type="radio" id="repsalt" name="repsrb"><label class="radiolbl" for="repsalt">Alternate</label>
+			<input type="radio" id="reps10" name="repsrb"><label class="radiolbl" for="reps10">10/2</label>
+		</div>
+
+		<!-- Swings type -->
+		<div id="swingsGroup" class="configGroup">
+			<input type="radio" id="sw2" name="swtyperb" checked="checked"><label class="radiolbl" for="sw2">Two-arm Swings</label>
+			<input type="radio" id="sw1" name="swtyperb"><label class="radiolbl" for="sw1">One-arm</label>
+		</div>
+
+		<!-- Pushups type -->
+		<div id="pushupsGroup" class="configGroup">
+			<input type="radio" id="pup" name="putyperb" checked="checked"><label class="radiolbl" for="pup">Palms Pushups</label>
+			<input type="radio" id="puf" name="putyperb"><label class="radiolbl" for="puf">Fists</label>
+		</div>
+
+		<!-- Dominant side -->
+		<div id="dominantSideGroup" class="configGroup">
+			<input type="radio" id="doml" name="dominantsiderb"><label class="radiolbl" for="doml">Left Dominant-side</label>
+			<input type="radio" id="domr" name="dominantsiderb" checked="checked"><label class="radiolbl" for="domr">Right</label>
+		</div>
+
+		<br/>
+		<button type="button" onClick="startStop()" class="btn btn-default btn-sm">Start</button>
+		<br/>
+		<br/>
+
+		<div onClick="openCog()"><span class="glyphicon glyphicon-cog"></span> Settings</div>
+	</div>
+
+	<div id="cog" style="text-align:center; display: none">
+		<div class="configGroup" style="text-align:left; display: inline-block">
+			Set ending sound:
+			<br/>
+			<br/>
+			<input type="radio" id="endSoundCharge" name="endsoundrb" checked="checked"><label class="radiolbl" for="endSoundCharge">Charge</label>
+			<input type="radio" id="endSoundRace" name="endsoundrb"><label class="radiolbl" for="endSoundRace">Race</label>
+			<input type="radio" id="endSoundNone" name="endsoundrb"><label class="radiolbl" for="endSoundNone">None</label>
+		</div>
+
+		<br/>
+		<br/>
+		<br/>
+		<button type="button" onClick="closeCog()" class="btn btn-default btn-sm">Back</button>
+		
+		<br/>
+		<br/>
+		<div class="version"><label id="versionTitle">version:</label> <label id="version"></label></div>
+	</div>
+
+	<div id="run" style="text-align:center; display: none">		
+		<div class="plan">
+				<label id="elapsed">00:00</label> / <label id="totalTime">00:00</label><br/>
+				<label id="currentSeries">Swings series 1/2</label><br/>
+			<label class="big">
+				<label id="timer" class="timer">0</label><label class="timerSeconds">s</label><br/>
+				<label id="currentSet" class="now">Swings 5L</label></br>
+				Next:<br/>
+				<label id="nextSet">Rest</label><br/>
+			</label>
+		</label>
+
+		<br/>
+		<button type="button" onClick="startStop()" class="btn btn-default btn-sm">Cancel</button>
+
+		<br/>
+		<div id="keepUnlockedMessage" style="display: none">
+			<label class="keepUnlock">Keep this window VISIBLE.</label>
+			<label class="keepUnlock">(Otherwise sounds will STOP)</label>
+		</div>
+
+		<div id="jplayerExclamation"></div>
+		<div id="jplayerCharge"></div>
+		<div id="jplayerTickTock"></div>
+		<div id="jplayerEnd"></div>
+		<div id="jplayerRace"></div>
+		<div id="jplayerDice"></div>
+		
+		<video id="dummyVideo" volume="0" width="50" height="50" loop>
+			<source src="video/DummyMovie.mp4" type="video/mp4">
+		</video>
+	</div>
+</body>
+</html>
+

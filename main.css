@@ -1,0 +1,151 @@
+/* Disable up-down arrows in input (the event doesn't track them) */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=text],
+select{
+  -moz-border-radius:5px; /* Firefox */
+	-webkit-border-radius: 5px; /* Safari, Chrome */
+	-khtml-border-radius: 5px; /* KHTML */
+	border-radius: 5px; /* CSS3 */
+}
+
+input[type=button] {
+ -webkit-appearance: none; -moz-appearance: none;
+ margin: 1em 0;
+ font-size: 1em; line-height: 2.5em;
+ color: #333;
+ font-weight: bold;
+ height: 2.5em; width: 100%;
+ background: #fdfdfd; background: -moz-linear-gradient(top, #fdfdfd 0%, #bebebe 100%); background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fdfdfd), color-stop(100%,#bebebe)); background: -webkit-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -o-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: -ms-linear-gradient(top, #fdfdfd 0%,#bebebe 100%); background: linear-gradient(to bottom, #fdfdfd 0%,#bebebe 100%);
+ border: 1px solid #bbb;
+}
+
+.version {
+    color: rgb(215, 215, 215);
+    font-size: 10px;
+    font-weight: lighter;
+    text-align: center;
+}
+
+#versionTitle {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+}
+
+body {
+  background: black;
+  color: white;
+  font-family: sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+.group {
+  width: 350px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2em;
+}
+
+input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+
+
+.radiolbl {
+  position: relative;
+  margin-right: 1em;
+  padding-left: 2em;
+  padding-right: 1em;
+  line-height: 2;
+  cursor: pointer;
+}
+.radiolbl:before {
+  box-sizing: border-box;
+  content: " ";
+  position: absolute;
+  top: 0.3em;
+  left: 0;
+  display: block;
+  width: 1.4em;
+  height: 1.4em;
+  border: 2px solid white;
+  border-radius: .25em;
+  z-index: -1;
+}
+
+input[type="radio"] + .radiolbl::before {
+  border-radius: 1em;
+}
+
+input[type="radio"]:checked + .radiolbl {
+  padding-left: 1em;
+  color: black;
+}
+input[type="radio"]:checked + .radiolbl:before {
+  top: 0;
+  width: 100%;
+  height: 2em;
+  background: white;
+}
+
+/* Transition */
+.radiolbl,
+.radiolbl::before {
+  transition: .25s all ease;
+}
+
+.plan {
+  font-weight: normal;
+  font-size: 20px;
+}
+
+.big {
+  font-size: x-large;
+}
+
+.now {
+  color: yellow;
+  font-size: 25px;
+}
+
+.timer {
+  color: yellow;
+  font-size: 100px;
+}
+
+.timerSeconds {
+  color: yellow;
+}
+
+.center-block {
+  margin: auto;
+  display: block;
+}
+
+.keepUnlock {
+  color: red;
+  font-size: 16px;
+}
+
+#dummyVideo {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.configGroup {
+  padding: 0 0 10px 0;
+}
